@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Word } from '../word'
 declare var $:any
 
@@ -11,12 +11,14 @@ declare var $:any
 export class InputBoxComponent implements OnInit {
   	word="";
   	
-  	logText(value: string): void {
-  		this.word = "";
-    	this.word += `${value}`;
-    	console.log(this.word);
-  	}
-  	constructor() { }
+    @Output() inputWord = new EventEmitter<string>();
+  	
+    onEnter(value: string) { 
+      this.word = value;
+      this.inputWord.emit(this.word);
+    }
+  
+    constructor() { }
 
   	ngOnInit() { }
 }

@@ -1,7 +1,6 @@
 <h2>단어 입력</h2>
 <div>
     <div>
-    	<input #textbox type="text" [(ngModel)]="value" required>
-        <button (click)="logText(textbox.value)">submit</button>
+    	<input #box placeholder="input Here" (keyup.enter)="onEnter(box.value)">
     </div>
 </div>

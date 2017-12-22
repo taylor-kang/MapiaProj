@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { Score } from '../score';
 
 @Component({
@@ -8,11 +8,7 @@ import { Score } from '../score';
 })
 
 export class ScoreBoxComponent implements OnInit {
-  score: Score = {
-    level: 0,
-    success: 0,
-    fail: 0
-  };
+  @Input() score: Score;
 
   constructor() { }
 

@@ -10,5 +10,10 @@ export const WORDS: Word[] = [
     { name: 'Dynama', x: 0, y: 0 },
     { name: 'DrIQ', x: 0, y: 0 },
     { name: 'Magma', x: 0, y: 0 },
-    { name: 'Tornado', x: 0, y: 0 }
+    { name: 'Tornado', x: 0, y: 0 },
+    { name: 'everyday', x: 0, y: 0 },
+    { name: 'christmas', x: 0, y: 0 },
+    { name: 'winter', x: 0, y: 0 },
+    { name: 'hanyang', x: 0, y: 0 },
+    { name: 'mapiaCompany', x: 0, y: 0 },
 ];
