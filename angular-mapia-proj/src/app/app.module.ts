@@ -8,6 +8,9 @@ import { InputBoxComponent } from './input-box/input-box.component';
 import { ScoreBoxComponent } from './score-box/score-box.component';
 import { AppRoutingModule } from './/app-routing.module';
 
+import { RouterModule }   from '@angular/router';
+
+
 
 @NgModule({
   declarations: [
@@ -19,7 +22,18 @@ import { AppRoutingModule } from './/app-routing.module';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule  
+    RouterModule.forRoot([
+      {
+        path: 'app-root',
+        component: AppComponent
+      }
+    ]),
+    RouterModule.forChild([
+      {
+        path: 'app-game-box',
+        component: GameBoxComponent
+      }
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]

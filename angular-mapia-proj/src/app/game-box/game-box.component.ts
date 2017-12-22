@@ -31,15 +31,11 @@ export class GameBoxComponent implements OnInit {
     var i = 0;
     this.timerForAdd = Observable.timer(0,5000);
     this.subForAdd = this.timerForAdd.subscribe(t=> { 
-      
-
-
       console.log("add");
       if(i < this.len){
         this.fallWords.push(this.words[i]);
         this.fallWords[i].y = Math.floor(Math.random() * 80);
         this.fallWords[i].x = Math.floor(Math.random() * 1000);
-        
         i++;
 
       }
