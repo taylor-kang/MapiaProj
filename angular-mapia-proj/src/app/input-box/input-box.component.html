@@ -1,0 +1,8 @@
+<h2> input-box </h2>
+<div>
+    <span>Game Start</span>
+    <div>
+    	<input #textbox type="text" [(ngModel)]="value" required>
+        <button (click)="logText(textbox.value)">submit</button>
+    </div>
+</div>
