@@ -7,6 +7,7 @@ import { GameBoxComponent } from './game-box/game-box.component';
 import { InputBoxComponent } from './input-box/input-box.component';
 import { ScoreBoxComponent } from './score-box/score-box.component';
 import { AppRoutingModule } from './app-routing.module';
+import { Word} from './word'
 
 import { RouterModule }   from '@angular/router';
 import { MainComponent } from './main/main.component';
@@ -21,6 +22,7 @@ import { ResultPageComponent } from './result-page/result-page.component';
     InputBoxComponent,
     ScoreBoxComponent,
     MainComponent,
+    Word,
     ResultPageComponent
   ],
   imports: [
