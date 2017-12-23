@@ -1,5 +1,0 @@
-export * from './app.component'
-export * from './main/main.component'
-export * from './game-box/game-box.component'
-export * from './input-box/input-box.component'
-export * from './score-box/score-box.component'
