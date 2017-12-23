@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { RouterModule }   from '@angular/router';
 import { MainComponent } from './main/main.component';
+import { ResultPageComponent } from './result-page/result-page.component';
 
 
 
@@ -19,7 +20,8 @@ import { MainComponent } from './main/main.component';
     GameBoxComponent,
     InputBoxComponent,
     ScoreBoxComponent,
-    MainComponent
+    MainComponent,
+    ResultPageComponent
   ],
   imports: [
     BrowserModule,

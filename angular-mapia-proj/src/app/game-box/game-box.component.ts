@@ -92,7 +92,7 @@ export class GameBoxComponent implements OnInit {
             this.fallWords[i].y = 0;
             //game over
             if(this.score.fail == 8){
-               alert("fail!");
+               return;
             }
 
           }

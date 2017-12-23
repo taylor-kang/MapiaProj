@@ -11,11 +11,17 @@ import {
   GameBoxComponent
 } from './game-box/game-box.component';
 
+import {
+	ResultPageComponent
+} from './result-page/result-page.component'
+
+
 // 라우트 구성
 const routes: Routes = [
 	{path: '', redirectTo: 'main', pathMatch: 'full'},
   { path: 'main', component: MainComponent},
-  { path: 'game', component: GameBoxComponent }
+  { path: 'game', component: GameBoxComponent },
+  { path: 'result', component: ResultPageComponent}
 ];
 
 @NgModule({
