@@ -1,4 +1,4 @@
-import { Component, OnInit, Output,EventEmitter, Input,ViewChild } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter, Input } from '@angular/core';
 import { Word }  from '../word';
 import { WORDS } from '../mock-words';
 import { FALLING_WORDS } from '../falling-words';
