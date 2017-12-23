@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { GameBoxComponent } from './game-box/game-box.component';
 import { InputBoxComponent } from './input-box/input-box.component';
 import { ScoreBoxComponent } from './score-box/score-box.component';
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
 import { RouterModule }   from '@angular/router';
+import { MainComponent } from './main/main.component';
 
 
 
@@ -17,23 +18,13 @@ import { RouterModule }   from '@angular/router';
     AppComponent,
     GameBoxComponent,
     InputBoxComponent,
-    ScoreBoxComponent
+    ScoreBoxComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot([
-      {
-        path: 'app-root',
-        component: AppComponent
-      }
-    ]),
-    RouterModule.forChild([
-      {
-        path: 'app-game-box',
-        component: GameBoxComponent
-      }
-    ])
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

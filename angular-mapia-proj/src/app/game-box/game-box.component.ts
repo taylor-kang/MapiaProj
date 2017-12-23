@@ -11,13 +11,6 @@ declare var $:any
   selector: 'app-game-box',
   templateUrl: './game-box.component.html',
   styleUrls: ['./game-box.component.css'],
-  template: `
-    <div *ngFor="let word of fallWords" class="word {{word.name}}">
-      <span>{{ word.name }} </span>
-    </div>
-    <app-input-box (inputWord)="getInput($event)"></app-input-box>
-    <app-score-box [score] = "score"></app-score-box>
-  `
 })
 
 export class GameBoxComponent implements OnInit {
