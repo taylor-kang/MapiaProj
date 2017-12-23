@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+	background: black;
+}
+.footer {
+	height: 10em;
+	color: lightgrey;
+	text-align: center;
+	font-style: italic;
+	font-size: 1em;
+	font-family: '210';
+}
+.footer p{
+	padding: 2em;
+}
+
+@font-face {
+	font-family: '210';
+	src: url('./assets/font/210R.ttf') format('ttf'), url('./assets/font/210R.woff') format('woff');
+}

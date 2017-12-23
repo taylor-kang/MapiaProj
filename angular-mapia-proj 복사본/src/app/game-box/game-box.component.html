@@ -1,0 +1,19 @@
+<div class="wrapper row">
+	<div class="frontBox col-lg-3 col-md-3">
+		<h1>마피아 미니게임</h1>
+		<div class="inputBox">
+			<app-input-box (inputWord)="getInput($event)"></app-input-box>
+		</div>
+		<div class="scoreBox">
+			<app-score-box [score] = "score"></app-score-box>
+		</div>
+	</div>
+	<div class="secondBox col-lg-9 col-md-9">
+		<div class="gameBox ">
+			<div *ngFor="let word of fallWords" class="word {{word.name}}">
+			      <span>{{ word.name }} </span>
+			</div>
+		</div>
+	</div>
+
+</div>
