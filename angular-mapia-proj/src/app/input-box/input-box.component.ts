@@ -17,7 +17,8 @@ export class InputBoxComponent implements OnInit {
       this.word = value;
       this.inputWord.emit(this.word);
       //to-do: 
-      $('#box').val('');
+      //$('#box').val('');
+      this.word = '';
     }
   
     constructor() { }
