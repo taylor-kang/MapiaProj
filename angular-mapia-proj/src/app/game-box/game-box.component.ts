@@ -1,4 +1,4 @@
-import { Component, OnInit, Output,EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter, Input, ElementRef,Renderer } from '@angular/core';
 import { Word }  from '../word';
 import { WORDS } from '../mock-words';
 import { FALLING_WORDS } from '../falling-words';
@@ -30,75 +30,104 @@ export class GameBoxComponent implements OnInit {
   subForFall: Subscription;
   timerForAdd;
   timerForFall;
-
-  constructor() { }
+  
+  constructor(private elementRef: ElementRef, public renderer: Renderer) { }
 
   len = this.words.length;
-  
+
   //5초마다 떨어지는 단어 추가 
   addWordInint(){
     var i;
     this.timerForAdd = Observable.timer(0,5000);
     
     this.subForAdd = this.timerForAdd.subscribe(t=> { 
-      console.log("add");  
-      
       i = Math.floor(Math.random() * 1000) % this.len; 
+      
       this.fallWords.push(this.words[i]);
-      this.fallWords[this.fallWords.length -1].y = Math.floor(Math.random() * 80);
-      this.fallWords[this.fallWords.length -1].x = Math.floor(Math.random() * 800 + 100);
+      console.log("add : " + this.words[i].name); 
+      
+      this.fallWords[this.fallWords.length-1].y = Math.floor(Math.random() * 80);
+      this.fallWords[this.fallWords.length-1].x = Math.floor(Math.random() * 800 + 100);
+       
+      console.log(this.fallWords);
     });
   }
 
   //0.5초마다 밑으로 떨어지는 단어
   dropInit(){
-
     this.timerForFall = Observable.timer(0,300);
     this.subForFall = this.timerForFall.subscribe(t=> {
-     
-      for(var i in this.fallWords){
 
-        //success
-        if(this.fallWords[i].name == this.wordFromUser
-          && $("." + this.fallWords[i].name).css("visibility") != "hidden"){
-          this.score.success++;
-          this.fallWords[i].x = 0;
-          this.fallWords[i].y = 0;
-          this.wordFromUser = "";
-          $("." + this.fallWords[i].name).css("visibility", "hidden");
-        }
-
+      this.fallWords.forEach(fallingWord => { 
         
-        if($("." + this.fallWords[i].name).css("visibility") != "hidden"){
-          //drop the word
-          this.fallWords[i].y += 10;
-          $("." + this.fallWords[i].name).css("top", this.fallWords[i].y + "px");
-          $("." + this.fallWords[i].name).css("left", this.fallWords[i].x + "px");
-         
-          //alert
-          if(this.fallWords[i].y >= 400){
-            $("." + this.fallWords[i].name).css("color", "red");
-            $("." + this.fallWords[i].name).css("background", "lightgrey");
+        
+        if(fallingWord.life == 1){
+          //success
+          if(fallingWord.name == this.wordFromUser){
+            console.log("success : " + fallingWord.name);
+            let selectedWord = this.elementRef.nativeElement.querySelector("." + fallingWord.name);          
+            this.renderer.setElementStyle(selectedWord, 'visibility', 'hidden');
+            
+            //delete from fallWord Array
+            //let tmp = new Word(fallingWord.name, fallingWord.x, fallingWord.y);
+            let idx = this.fallWords.indexOf(fallingWord, 0);
+            this.fallWords.splice(idx, 1);
+            console.log(this.fallWords);
+            // fallingWord.x = 0;
+            // fallingWord.y = 0;
+            // fallingWord.life = 0;
+            // this.renderer.setElementStyle(selectedWord, 'top', fallingWord.y + "px");
+            // this.renderer.setElementStyle(selectedWord, 'left', fallingWord.x + "px");
+
+            this.score.success++;
+            this.wordFromUser = "";
           }
-        }
-        //fail
-        if(this.fallWords[i].y >= 610){
-          if(this.fallWords[i].y >= 610 
-            && this.fallWords[i].y <= 620
-            && $("." + this.fallWords[i].name).css("visibility") != "hidden"){
-            this.score.fail++;
-            this.fallWords[i].x = 0;
-            this.fallWords[i].y = 0;
-            //game over
-            if(this.score.fail == 8){
-               return;
+        
+          else {
+            //drop
+            let selectedWord = this.elementRef.nativeElement.querySelector("." + fallingWord.name);
+            
+            //drop the word
+            fallingWord.y += 10;
+            this.renderer.setElementStyle(selectedWord, 'top', fallingWord.y + "px");
+            this.renderer.setElementStyle(selectedWord, 'left', fallingWord.x + "px");
+            
+            //alert
+            if(fallingWord.y >= 400){
+              this.renderer.setElementStyle(selectedWord, 'color', 'red');
+              this.renderer.setElementStyle(selectedWord, 'background', 'lightgrey');
             }
+            
+            //fail
+            if(fallingWord.y >= 610){
+              console.log("fail : " + fallingWord.name);
+              //delete from fallWord Array
+              this.renderer.setElementStyle(selectedWord, 'visibility', 'hidden');
+              
+              //let tmp = new Word(fallingWord.name, fallingWord.x, fallingWord.y);
+              let idx = this.fallWords.indexOf(fallingWord, 0);
+              this.fallWords.splice(idx, 1);
+              console.log(this.fallWords);
 
+              this.score.fail++;
+              // fallingWord.x = 0;
+              // fallingWord.y = 0;
+              //fallingWord.life = 0;
+              //this.renderer.setElementStyle(selectedWord, 'top', fallingWord.y + "px");
+              //this.renderer.setElementStyle(selectedWord, 'left', fallingWord.x + "px");
+
+              //game over
+              if(this.score.fail == 8){
+                 return;
+              }
+              
+
+            }
           }
-          $("." + this.fallWords[i].name).css("visibility", "hidden");
         }
 
-      }
+      });
+ 
     });
   }
 
