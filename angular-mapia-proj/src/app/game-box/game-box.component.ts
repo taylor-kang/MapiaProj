@@ -1,4 +1,4 @@
-import { Component, OnInit, Output,EventEmitter, Input, ElementRef,Renderer } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter, Input, ElementRef,Renderer2 } from '@angular/core';
 import { Word }  from '../word';
 import { WORDS } from '../mock-words';
 import { FALLING_WORDS } from '../falling-words';
@@ -33,7 +33,7 @@ export class GameBoxComponent implements OnInit {
     console.log(this.wordFromUser);
   }
 
-  constructor(private elementRef: ElementRef, public renderer: Renderer) { }
+  constructor(private elementRef: ElementRef, public renderer: Renderer2) { }
 
   
   //5초마다 떨어지는 단어 추가 
@@ -49,7 +49,7 @@ export class GameBoxComponent implements OnInit {
       tmp.y = Math.floor(Math.random() * 80);
       tmp.x = Math.floor(Math.random() * 800 + 100);
       this.fallWords.push(tmp);
-         
+           
       console.log(this.fallWords);
     });
   }
@@ -60,13 +60,14 @@ export class GameBoxComponent implements OnInit {
     this.subForFall = this.timerForFall.subscribe(t=> {
 
       this.fallWords.forEach(fallingWord => { 
+        let idx = this.fallWords.indexOf(fallingWord, 0);
+             
         if(fallingWord.life == 1){
           //success
           if(fallingWord.name == this.wordFromUser){
             console.log("success : " + fallingWord.name);
             
             //delete from fallWord Array
-            let idx = this.fallWords.indexOf(fallingWord, 0);
             this.fallWords.splice(idx, 1);
             console.log(this.fallWords);
             
@@ -75,16 +76,18 @@ export class GameBoxComponent implements OnInit {
           }
         
           else {
+            console.log("confirm: " + idx);
             //drop
             let selectedWord = this.elementRef.nativeElement.querySelector("." + fallingWord.name);
+            
             fallingWord.y += 10;
-            this.renderer.setElementStyle(selectedWord, 'top', fallingWord.y + "px");
-            this.renderer.setElementStyle(selectedWord, 'left', fallingWord.x + "px");
+            this.renderer.setStyle(selectedWord, 'top', fallingWord.y + "px");
+            this.renderer.setStyle(selectedWord, 'left', fallingWord.x + "px");
     
             //alert
             if(fallingWord.y >= 400){
-              this.renderer.setElementStyle(selectedWord, 'color', 'red');
-              this.renderer.setElementStyle(selectedWord, 'background', 'lightgrey');
+              this.renderer.setStyle(selectedWord, 'color', 'red');
+              this.renderer.setStyle(selectedWord, 'background', 'lightgrey');
             }
             
             //fail
@@ -92,8 +95,8 @@ export class GameBoxComponent implements OnInit {
               console.log("fail : " + fallingWord.name);
               
               //delete from fallWord Array
-              this.renderer.setElementStyle(selectedWord, 'visibility', 'hidden');
-              let idx = this.fallWords.indexOf(fallingWord, 0);
+              this.renderer.setStyle(selectedWord, 'visibility', 'hidden');
+              idx = this.fallWords.indexOf(fallingWord, 0);
               this.fallWords.splice(idx, 1);
               console.log(this.fallWords);
 
