@@ -34,20 +34,19 @@ export class GameBoxComponent implements OnInit {
   constructor() { }
 
   len = this.words.length;
-
+  
   //5초마다 떨어지는 단어 추가 
   addWordInint(){
-    var i = 0;
+    var i;
     this.timerForAdd = Observable.timer(0,5000);
+    
     this.subForAdd = this.timerForAdd.subscribe(t=> { 
-      console.log("add");
-      if(i < this.len){
-        this.fallWords.push(this.words[i]);
-        this.fallWords[i].y = Math.floor(Math.random() * 80);
-        this.fallWords[i].x = Math.floor(Math.random() * 800 + 100);
-        i++;
-
-      }
+      console.log("add");  
+      
+      i = Math.floor(Math.random() * 1000) % this.len; 
+      this.fallWords.push(this.words[i]);
+      this.fallWords[this.fallWords.length -1].y = Math.floor(Math.random() * 80);
+      this.fallWords[this.fallWords.length -1].x = Math.floor(Math.random() * 800 + 100);
     });
   }
 
