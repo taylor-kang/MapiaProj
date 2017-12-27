@@ -10,7 +10,7 @@ declare var $:any
 @Component({
   selector: 'app-game-box',
   templateUrl: './game-box.component.html',
-  styleUrls: ['./game-box.component.css'],
+  styleUrls: ['./game-box.component.scss'],
 })
 
 export class GameBoxComponent implements OnInit {
