@@ -10,7 +10,7 @@
 	</div>
 	<div class="secondBox col-lg-9 col-md-9">
 		<div class="gameBox ">
-			<div *ngFor="let word of fallWords" class="word {{word.name}}">
+			<div *ngFor="let word of fallWords" class="word" [ngClass] = "word.name">
 			      <span>{{ word.name }} </span>
 			</div>
 		</div>
